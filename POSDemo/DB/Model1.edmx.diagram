@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="991acefd05b3432f992bdfe6192e959d" Name="Diagram1">
+        <EntityTypeShape EntityType="POSModel.TbCustomer" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="POSModel.TbItem" Width="1.5" PointX="2.75" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="POSModel.TbSupplier" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="POSModel.TbUser" Width="1.5" PointX="1.125" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="POSModel.TbCategory" Width="1.5" PointX="3.375" PointY="4.75" />
+        <EntityTypeShape EntityType="POSModel.sysdiagram" Width="1.5" PointX="11.25" PointY="2.25" />
+        <AssociationConnector Association="POSModel.FK_TbItem_TbCategory" />
+        <EntityTypeShape EntityType="POSModel.TbPurchaseInvoiceItem" Width="1.5" PointX="8.125" PointY="0.5" />
+        <EntityTypeShape EntityType="POSModel.TbPurshaseInvoice" Width="1.5" PointX="5.875" PointY="11.75" />
+        <EntityTypeShape EntityType="POSModel.TbSalesInvoice" Width="1.5" PointX="7.125" PointY="14.75" />
+        <EntityTypeShape EntityType="POSModel.TbSalesInvoiceItem" Width="1.5" PointX="10.375" PointY="4.625" />
+        <AssociationConnector Association="POSModel.FK_TbCustomer_TbCustomer" />
+        <AssociationConnector Association="POSModel.FK_TbSalesInvoice_TbCustomer" />
+        <AssociationConnector Association="POSModel.FK_TbPurchaseInvoiceItem_TbItem" />
+        <AssociationConnector Association="POSModel.FK_TbSalesInvoiceItem_TbItem" />
+        <AssociationConnector Association="POSModel.FK_TbPurchaseInvoiceItem_TbPurshaseInvoice" />
+        <AssociationConnector Association="POSModel.FK_TbPurshaseInvoice_TbSupplier" />
+        <AssociationConnector Association="POSModel.FK_TbSalesInvoiceItem_TbSalesInvoice" />
+        <AssociationConnector Association="POSModel.FK_TbPurshaseInvoice_TbUser" />
+        <AssociationConnector Association="POSModel.FK_TbSalesInvoice_TbUser" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,304 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="POSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="TbCustomer">
+    <Key>
+      <PropertyRef Name="CustomerId" />
+    </Key>
+    <Property Name="CustomerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Company" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TbCustomer1" Relationship="POSModel.FK_TbCustomer_TbCustomer" FromRole="TbCustomer" ToRole="TbCustomer1" />
+    <NavigationProperty Name="TbCustomer2" Relationship="POSModel.FK_TbCustomer_TbCustomer" FromRole="TbCustomer1" ToRole="TbCustomer" />
+    <NavigationProperty Name="TbSalesInvoices" Relationship="POSModel.FK_TbSalesInvoice_TbCustomer" FromRole="TbCustomer" ToRole="TbSalesInvoice" />
+  </EntityType>
+  <EntityType Name="TbItem">
+    <Key>
+      <PropertyRef Name="ItemId" />
+    </Key>
+    <Property Name="ItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ItemName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SalesPrice" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TbCategory" Relationship="POSModel.FK_TbItem_TbCategory" FromRole="TbItem" ToRole="TbCategory" />
+    <NavigationProperty Name="TbPurchaseInvoiceItems" Relationship="POSModel.FK_TbPurchaseInvoiceItem_TbItem" FromRole="TbItem" ToRole="TbPurchaseInvoiceItem" />
+    <NavigationProperty Name="TbSalesInvoiceItems" Relationship="POSModel.FK_TbSalesInvoiceItem_TbItem" FromRole="TbItem" ToRole="TbSalesInvoiceItem" />
+    <Property Name="PurchasePrice" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+  </EntityType>
+  <EntityType Name="TbSupplier">
+    <Key>
+      <PropertyRef Name="SupplierId" />
+    </Key>
+    <Property Name="SupplierId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SupplierName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Company" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TbPurshaseInvoices" Relationship="POSModel.FK_TbPurshaseInvoice_TbSupplier" FromRole="TbSupplier" ToRole="TbPurshaseInvoice" />
+  </EntityType>
+  <EntityType Name="TbUser">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TbPurshaseInvoices" Relationship="POSModel.FK_TbPurshaseInvoice_TbUser" FromRole="TbUser" ToRole="TbPurshaseInvoice" />
+    <NavigationProperty Name="TbSalesInvoices" Relationship="POSModel.FK_TbSalesInvoice_TbUser" FromRole="TbUser" ToRole="TbSalesInvoice" />
+  </EntityType>
+  <EntityContainer Name="POSEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="TbCustomers" EntityType="Self.TbCustomer" />
+    <EntitySet Name="TbItems" EntityType="Self.TbItem" />
+    <EntitySet Name="TbSuppliers" EntityType="Self.TbSupplier" />
+    <EntitySet Name="TbUsers" EntityType="Self.TbUser" />
+    <EntitySet Name="TbCategories" EntityType="POSModel.TbCategory" />
+    <EntitySet Name="sysdiagrams" EntityType="POSModel.sysdiagram" />
+    <AssociationSet Name="FK_TbItem_TbCategory" Association="POSModel.FK_TbItem_TbCategory">
+      <End Role="TbCategory" EntitySet="TbCategories" />
+      <End Role="TbItem" EntitySet="TbItems" />
+    </AssociationSet>
+    <EntitySet Name="TbPurchaseInvoiceItems" EntityType="POSModel.TbPurchaseInvoiceItem" />
+    <EntitySet Name="TbPurshaseInvoices" EntityType="POSModel.TbPurshaseInvoice" />
+    <EntitySet Name="TbSalesInvoices" EntityType="POSModel.TbSalesInvoice" />
+    <EntitySet Name="TbSalesInvoiceItems" EntityType="POSModel.TbSalesInvoiceItem" />
+    <AssociationSet Name="FK_TbCustomer_TbCustomer" Association="POSModel.FK_TbCustomer_TbCustomer">
+      <End Role="TbCustomer" EntitySet="TbCustomers" />
+      <End Role="TbCustomer1" EntitySet="TbCustomers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TbSalesInvoice_TbCustomer" Association="POSModel.FK_TbSalesInvoice_TbCustomer">
+      <End Role="TbCustomer" EntitySet="TbCustomers" />
+      <End Role="TbSalesInvoice" EntitySet="TbSalesInvoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TbPurchaseInvoiceItem_TbItem" Association="POSModel.FK_TbPurchaseInvoiceItem_TbItem">
+      <End Role="TbItem" EntitySet="TbItems" />
+      <End Role="TbPurchaseInvoiceItem" EntitySet="TbPurchaseInvoiceItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TbSalesInvoiceItem_TbItem" Association="POSModel.FK_TbSalesInvoiceItem_TbItem">
+      <End Role="TbItem" EntitySet="TbItems" />
+      <End Role="TbSalesInvoiceItem" EntitySet="TbSalesInvoiceItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TbPurchaseInvoiceItem_TbPurshaseInvoice" Association="POSModel.FK_TbPurchaseInvoiceItem_TbPurshaseInvoice">
+      <End Role="TbPurshaseInvoice" EntitySet="TbPurshaseInvoices" />
+      <End Role="TbPurchaseInvoiceItem" EntitySet="TbPurchaseInvoiceItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TbPurshaseInvoice_TbSupplier" Association="POSModel.FK_TbPurshaseInvoice_TbSupplier">
+      <End Role="TbSupplier" EntitySet="TbSuppliers" />
+      <End Role="TbPurshaseInvoice" EntitySet="TbPurshaseInvoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TbSalesInvoiceItem_TbSalesInvoice" Association="POSModel.FK_TbSalesInvoiceItem_TbSalesInvoice">
+      <End Role="TbSalesInvoice" EntitySet="TbSalesInvoices" />
+      <End Role="TbSalesInvoiceItem" EntitySet="TbSalesInvoiceItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TbPurshaseInvoice_TbUser" Association="POSModel.FK_TbPurshaseInvoice_TbUser">
+      <End Role="TbUser" EntitySet="TbUsers" />
+      <End Role="TbPurshaseInvoice" EntitySet="TbPurshaseInvoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TbSalesInvoice_TbUser" Association="POSModel.FK_TbSalesInvoice_TbUser">
+      <End Role="TbUser" EntitySet="TbUsers" />
+      <End Role="TbSalesInvoice" EntitySet="TbSalesInvoices" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="TbCategory">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CategoryName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TbItems" Relationship="POSModel.FK_TbItem_TbCategory" FromRole="TbCategory" ToRole="TbItem" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_TbItem_TbCategory">
+    <End Type="POSModel.TbCategory" Role="TbCategory" Multiplicity="1" />
+    <End Type="POSModel.TbItem" Role="TbItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TbCategory">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="TbItem">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TbPurchaseInvoiceItem">
+    <Key>
+      <PropertyRef Name="InvoiceItemId" />
+    </Key>
+    <Property Name="InvoiceItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InvoiceId" Type="Int32" Nullable="false" />
+    <Property Name="ItemId" Type="Int32" Nullable="false" />
+    <Property Name="PurchasePrice" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+    <Property Name="Qty" Type="Int32" Nullable="false" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TbItem" Relationship="POSModel.FK_TbPurchaseInvoiceItem_TbItem" FromRole="TbPurchaseInvoiceItem" ToRole="TbItem" />
+    <NavigationProperty Name="TbPurshaseInvoice" Relationship="POSModel.FK_TbPurchaseInvoiceItem_TbPurshaseInvoice" FromRole="TbPurchaseInvoiceItem" ToRole="TbPurshaseInvoice" />
+  </EntityType>
+  <EntityType Name="TbPurshaseInvoice">
+    <Key>
+      <PropertyRef Name="InvoiceId" />
+    </Key>
+    <Property Name="InvoiceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InvoiceDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="SupplierId" Type="Int32" Nullable="false" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TbPurchaseInvoiceItems" Relationship="POSModel.FK_TbPurchaseInvoiceItem_TbPurshaseInvoice" FromRole="TbPurshaseInvoice" ToRole="TbPurchaseInvoiceItem" />
+    <NavigationProperty Name="TbSupplier" Relationship="POSModel.FK_TbPurshaseInvoice_TbSupplier" FromRole="TbPurshaseInvoice" ToRole="TbSupplier" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TbUser" Relationship="POSModel.FK_TbPurshaseInvoice_TbUser" FromRole="TbPurshaseInvoice" ToRole="TbUser" />
+  </EntityType>
+  <EntityType Name="TbSalesInvoice">
+    <Key>
+      <PropertyRef Name="InvoiceId" />
+    </Key>
+    <Property Name="InvoiceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InvoiceDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CustomerId" Type="Int32" Nullable="false" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TbCustomer" Relationship="POSModel.FK_TbSalesInvoice_TbCustomer" FromRole="TbSalesInvoice" ToRole="TbCustomer" />
+    <NavigationProperty Name="TbSalesInvoiceItems" Relationship="POSModel.FK_TbSalesInvoiceItem_TbSalesInvoice" FromRole="TbSalesInvoice" ToRole="TbSalesInvoiceItem" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="TbUser" Relationship="POSModel.FK_TbSalesInvoice_TbUser" FromRole="TbSalesInvoice" ToRole="TbUser" />
+  </EntityType>
+  <EntityType Name="TbSalesInvoiceItem">
+    <Key>
+      <PropertyRef Name="InvoiceItemId" />
+    </Key>
+    <Property Name="InvoiceItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InvoiceId" Type="Int32" Nullable="false" />
+    <Property Name="ItemId" Type="Int32" Nullable="false" />
+    <Property Name="SalesPrice" Type="Decimal" Nullable="false" Precision="18" Scale="4" />
+    <Property Name="Qty" Type="Int32" Nullable="false" />
+    <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TbItem" Relationship="POSModel.FK_TbSalesInvoiceItem_TbItem" FromRole="TbSalesInvoiceItem" ToRole="TbItem" />
+    <NavigationProperty Name="TbSalesInvoice" Relationship="POSModel.FK_TbSalesInvoiceItem_TbSalesInvoice" FromRole="TbSalesInvoiceItem" ToRole="TbSalesInvoice" />
+  </EntityType>
+  <Association Name="FK_TbCustomer_TbCustomer">
+    <End Type="POSModel.TbCustomer" Role="TbCustomer" Multiplicity="1" />
+    <End Type="POSModel.TbCustomer" Role="TbCustomer1" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="TbCustomer">
+        <PropertyRef Name="CustomerId" />
+      </Principal>
+      <Dependent Role="TbCustomer1">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TbSalesInvoice_TbCustomer">
+    <End Type="POSModel.TbCustomer" Role="TbCustomer" Multiplicity="1" />
+    <End Type="POSModel.TbSalesInvoice" Role="TbSalesInvoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TbCustomer">
+        <PropertyRef Name="CustomerId" />
+      </Principal>
+      <Dependent Role="TbSalesInvoice">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TbPurchaseInvoiceItem_TbItem">
+    <End Type="POSModel.TbItem" Role="TbItem" Multiplicity="1" />
+    <End Type="POSModel.TbPurchaseInvoiceItem" Role="TbPurchaseInvoiceItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TbItem">
+        <PropertyRef Name="ItemId" />
+      </Principal>
+      <Dependent Role="TbPurchaseInvoiceItem">
+        <PropertyRef Name="ItemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TbSalesInvoiceItem_TbItem">
+    <End Type="POSModel.TbItem" Role="TbItem" Multiplicity="1" />
+    <End Type="POSModel.TbSalesInvoiceItem" Role="TbSalesInvoiceItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TbItem">
+        <PropertyRef Name="ItemId" />
+      </Principal>
+      <Dependent Role="TbSalesInvoiceItem">
+        <PropertyRef Name="ItemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TbPurchaseInvoiceItem_TbPurshaseInvoice">
+    <End Type="POSModel.TbPurshaseInvoice" Role="TbPurshaseInvoice" Multiplicity="1" />
+    <End Type="POSModel.TbPurchaseInvoiceItem" Role="TbPurchaseInvoiceItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TbPurshaseInvoice">
+        <PropertyRef Name="InvoiceId" />
+      </Principal>
+      <Dependent Role="TbPurchaseInvoiceItem">
+        <PropertyRef Name="InvoiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TbPurshaseInvoice_TbSupplier">
+    <End Type="POSModel.TbSupplier" Role="TbSupplier" Multiplicity="1" />
+    <End Type="POSModel.TbPurshaseInvoice" Role="TbPurshaseInvoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TbSupplier">
+        <PropertyRef Name="SupplierId" />
+      </Principal>
+      <Dependent Role="TbPurshaseInvoice">
+        <PropertyRef Name="SupplierId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TbSalesInvoiceItem_TbSalesInvoice">
+    <End Type="POSModel.TbSalesInvoice" Role="TbSalesInvoice" Multiplicity="1" />
+    <End Type="POSModel.TbSalesInvoiceItem" Role="TbSalesInvoiceItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TbSalesInvoice">
+        <PropertyRef Name="InvoiceId" />
+      </Principal>
+      <Dependent Role="TbSalesInvoiceItem">
+        <PropertyRef Name="InvoiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TbPurshaseInvoice_TbUser">
+    <End Type="POSModel.TbUser" Role="TbUser" Multiplicity="1" />
+    <End Type="POSModel.TbPurshaseInvoice" Role="TbPurshaseInvoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TbUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="TbPurshaseInvoice">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TbSalesInvoice_TbUser">
+    <End Type="POSModel.TbUser" Role="TbUser" Multiplicity="1" />
+    <End Type="POSModel.TbSalesInvoice" Role="TbSalesInvoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TbUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="TbSalesInvoice">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

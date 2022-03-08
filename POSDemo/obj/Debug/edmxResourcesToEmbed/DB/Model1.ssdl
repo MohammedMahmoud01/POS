@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="POSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="TbCategory">
+    <Key>
+      <PropertyRef Name="CategoryId" />
+    </Key>
+    <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryName" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TbCustomer">
+    <Key>
+      <PropertyRef Name="CustomerId" />
+    </Key>
+    <Property Name="CustomerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Company" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Image" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="TbItem">
+    <Key>
+      <PropertyRef Name="ItemId" />
+    </Key>
+    <Property Name="ItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ItemName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ItemCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="SalesPrice" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="PurchasePrice" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="Image" Type="nvarchar(max)" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TbPurchaseInvoiceItem">
+    <Key>
+      <PropertyRef Name="InvoiceItemId" />
+    </Key>
+    <Property Name="InvoiceItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InvoiceId" Type="int" Nullable="false" />
+    <Property Name="ItemId" Type="int" Nullable="false" />
+    <Property Name="PurchasePrice" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="Qty" Type="int" Nullable="false" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="TbPurshaseInvoice">
+    <Key>
+      <PropertyRef Name="InvoiceId" />
+    </Key>
+    <Property Name="InvoiceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InvoiceDate" Type="datetime" Nullable="false" />
+    <Property Name="SupplierId" Type="int" Nullable="false" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TbSalesInvoice">
+    <Key>
+      <PropertyRef Name="InvoiceId" />
+    </Key>
+    <Property Name="InvoiceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InvoiceDate" Type="datetime" Nullable="false" />
+    <Property Name="CustomerId" Type="int" Nullable="false" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TbSalesInvoiceItem">
+    <Key>
+      <PropertyRef Name="InvoiceItemId" />
+    </Key>
+    <Property Name="InvoiceItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="InvoiceId" Type="int" Nullable="false" />
+    <Property Name="ItemId" Type="int" Nullable="false" />
+    <Property Name="SalesPrice" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="Qty" Type="int" Nullable="false" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="TbSupplier">
+    <Key>
+      <PropertyRef Name="SupplierId" />
+    </Key>
+    <Property Name="SupplierId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SupplierName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Notes" Type="nvarchar(max)" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Company" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Image" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="TbUser">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Image" Type="nvarchar(max)" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_TbCustomer_TbCustomer">
+    <End Role="TbCustomer" Type="Self.TbCustomer" Multiplicity="1" />
+    <End Role="TbCustomer1" Type="Self.TbCustomer" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="TbCustomer">
+        <PropertyRef Name="CustomerId" />
+      </Principal>
+      <Dependent Role="TbCustomer1">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TbItem_TbCategory">
+    <End Role="TbCategory" Type="Self.TbCategory" Multiplicity="1" />
+    <End Role="TbItem" Type="Self.TbItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TbCategory">
+        <PropertyRef Name="CategoryId" />
+      </Principal>
+      <Dependent Role="TbItem">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TbPurchaseInvoiceItem_TbItem">
+    <End Role="TbItem" Type="Self.TbItem" Multiplicity="1" />
+    <End Role="TbPurchaseInvoiceItem" Type="Self.TbPurchaseInvoiceItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TbItem">
+        <PropertyRef Name="ItemId" />
+      </Principal>
+      <Dependent Role="TbPurchaseInvoiceItem">
+        <PropertyRef Name="ItemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TbPurchaseInvoiceItem_TbPurshaseInvoice">
+    <End Role="TbPurshaseInvoice" Type="Self.TbPurshaseInvoice" Multiplicity="1" />
+    <End Role="TbPurchaseInvoiceItem" Type="Self.TbPurchaseInvoiceItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TbPurshaseInvoice">
+        <PropertyRef Name="InvoiceId" />
+      </Principal>
+      <Dependent Role="TbPurchaseInvoiceItem">
+        <PropertyRef Name="InvoiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TbPurshaseInvoice_TbSupplier">
+    <End Role="TbSupplier" Type="Self.TbSupplier" Multiplicity="1" />
+    <End Role="TbPurshaseInvoice" Type="Self.TbPurshaseInvoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TbSupplier">
+        <PropertyRef Name="SupplierId" />
+      </Principal>
+      <Dependent Role="TbPurshaseInvoice">
+        <PropertyRef Name="SupplierId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TbPurshaseInvoice_TbUser">
+    <End Role="TbUser" Type="Self.TbUser" Multiplicity="1" />
+    <End Role="TbPurshaseInvoice" Type="Self.TbPurshaseInvoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TbUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="TbPurshaseInvoice">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TbSalesInvoice_TbCustomer">
+    <End Role="TbCustomer" Type="Self.TbCustomer" Multiplicity="1" />
+    <End Role="TbSalesInvoice" Type="Self.TbSalesInvoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TbCustomer">
+        <PropertyRef Name="CustomerId" />
+      </Principal>
+      <Dependent Role="TbSalesInvoice">
+        <PropertyRef Name="CustomerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TbSalesInvoice_TbUser">
+    <End Role="TbUser" Type="Self.TbUser" Multiplicity="1" />
+    <End Role="TbSalesInvoice" Type="Self.TbSalesInvoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TbUser">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="TbSalesInvoice">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TbSalesInvoiceItem_TbItem">
+    <End Role="TbItem" Type="Self.TbItem" Multiplicity="1" />
+    <End Role="TbSalesInvoiceItem" Type="Self.TbSalesInvoiceItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TbItem">
+        <PropertyRef Name="ItemId" />
+      </Principal>
+      <Dependent Role="TbSalesInvoiceItem">
+        <PropertyRef Name="ItemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TbSalesInvoiceItem_TbSalesInvoice">
+    <End Role="TbSalesInvoice" Type="Self.TbSalesInvoice" Multiplicity="1" />
+    <End Role="TbSalesInvoiceItem" Type="Self.TbSalesInvoiceItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TbSalesInvoice">
+        <PropertyRef Name="InvoiceId" />
+      </Principal>
+      <Dependent Role="TbSalesInvoiceItem">
+        <PropertyRef Name="InvoiceId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="POSModelStoreContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TbCategory" EntityType="Self.TbCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TbCustomer" EntityType="Self.TbCustomer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TbItem" EntityType="Self.TbItem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TbPurchaseInvoiceItem" EntityType="Self.TbPurchaseInvoiceItem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TbPurshaseInvoice" EntityType="Self.TbPurshaseInvoice" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TbSalesInvoice" EntityType="Self.TbSalesInvoice" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TbSalesInvoiceItem" EntityType="Self.TbSalesInvoiceItem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TbSupplier" EntityType="Self.TbSupplier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TbUser" EntityType="Self.TbUser" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_TbCustomer_TbCustomer" Association="Self.FK_TbCustomer_TbCustomer">
+      <End Role="TbCustomer" EntitySet="TbCustomer" />
+      <End Role="TbCustomer1" EntitySet="TbCustomer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TbItem_TbCategory" Association="Self.FK_TbItem_TbCategory">
+      <End Role="TbCategory" EntitySet="TbCategory" />
+      <End Role="TbItem" EntitySet="TbItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TbPurchaseInvoiceItem_TbItem" Association="Self.FK_TbPurchaseInvoiceItem_TbItem">
+      <End Role="TbItem" EntitySet="TbItem" />
+      <End Role="TbPurchaseInvoiceItem" EntitySet="TbPurchaseInvoiceItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TbPurchaseInvoiceItem_TbPurshaseInvoice" Association="Self.FK_TbPurchaseInvoiceItem_TbPurshaseInvoice">
+      <End Role="TbPurshaseInvoice" EntitySet="TbPurshaseInvoice" />
+      <End Role="TbPurchaseInvoiceItem" EntitySet="TbPurchaseInvoiceItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TbPurshaseInvoice_TbSupplier" Association="Self.FK_TbPurshaseInvoice_TbSupplier">
+      <End Role="TbSupplier" EntitySet="TbSupplier" />
+      <End Role="TbPurshaseInvoice" EntitySet="TbPurshaseInvoice" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TbPurshaseInvoice_TbUser" Association="Self.FK_TbPurshaseInvoice_TbUser">
+      <End Role="TbUser" EntitySet="TbUser" />
+      <End Role="TbPurshaseInvoice" EntitySet="TbPurshaseInvoice" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TbSalesInvoice_TbCustomer" Association="Self.FK_TbSalesInvoice_TbCustomer">
+      <End Role="TbCustomer" EntitySet="TbCustomer" />
+      <End Role="TbSalesInvoice" EntitySet="TbSalesInvoice" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TbSalesInvoice_TbUser" Association="Self.FK_TbSalesInvoice_TbUser">
+      <End Role="TbUser" EntitySet="TbUser" />
+      <End Role="TbSalesInvoice" EntitySet="TbSalesInvoice" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TbSalesInvoiceItem_TbItem" Association="Self.FK_TbSalesInvoiceItem_TbItem">
+      <End Role="TbItem" EntitySet="TbItem" />
+      <End Role="TbSalesInvoiceItem" EntitySet="TbSalesInvoiceItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TbSalesInvoiceItem_TbSalesInvoice" Association="Self.FK_TbSalesInvoiceItem_TbSalesInvoice">
+      <End Role="TbSalesInvoice" EntitySet="TbSalesInvoice" />
+      <End Role="TbSalesInvoiceItem" EntitySet="TbSalesInvoiceItem" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
