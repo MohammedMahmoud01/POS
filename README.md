@@ -7,8 +7,7 @@ This Point of Sale (POS) system streamlines checkout operations and stock contro
 - Manage supermarket inventory
 - Process sales & checkout transactions
 - User-friendly Windows Forms interface
-- Database-driven storage with SQL Server
-
+  
 ## 🛠️ Tech Stack
 - **Desktop App:** Windows Forms (C#)  
 - **Database:** SQL Server  
