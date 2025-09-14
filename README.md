@@ -1,4 +1,17 @@
-# POS with Windows Forms C# 
-## To install it please install first sql server and sql server managment studio then backup POS.bak (database of the system)
-## then you should install any version of visual studio community then update the connection string of App.config in the project to the instancse of sql server you install
-# Finally Welcome to my POS
+# 🏪 Supermarket POS (Windows Forms)
+
+A **Windows Forms desktop application** for managing supermarket transactions and inventory.  
+This Point of Sale (POS) system streamlines checkout operations and stock control.
+
+## 🚀 Features
+- Manage supermarket inventory
+- Process sales & checkout transactions
+- User-friendly Windows Forms interface
+- Database-driven storage with SQL Server
+
+## 🛠️ Tech Stack
+- **Desktop App:** Windows Forms (C#)  
+- **Database:** SQL Server  
+
+## 🔗 Links
+- 💻 [GitHub Repository](https://github.com/MohammedMahmoud01/POS)
